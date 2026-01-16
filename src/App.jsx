@@ -9,10 +9,17 @@ const MassageWebsite = () => {
 
   // Check URL for /therapists path
   React.useEffect(() => {
-    const hash = window.location.hash;
-    if (hash === '#/therapists') {
-      setCurrentPage('therapists');
-    }
+    const checkHash = () => {
+      const hash = window.location.hash;
+      if (hash === '#/therapists' || hash === '#therapists') {
+        setCurrentPage('therapists');
+      }
+    };
+    
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    
+    return () => window.removeEventListener('hashchange', checkHash);
   }, []);
 
   // Password for therapist selection (you can change this)
